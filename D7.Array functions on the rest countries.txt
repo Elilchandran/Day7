@@ -1,0 +1,254 @@
+1.Array functions on the rest countries' data 
+(https://restcountries.com/v3.1/all).
+a.Get all the countries from the Asia continent /region using the Filter function
+b.Get all the countries with a population of less than 2 lakhs using Filter function
+c.Print the following details name, capital, flag using forEach function
+d.Print the total population of countries using reduce function
+e.Print the country which uses US Dollars as currency.
+         --------------------------------------------------------------
+a.Get all the countries from the Asia continent /region using the Filter function:
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rest Countries API Demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Rest Countries API Demo</h1>
+    <table id="countries-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Region</th>
+          <th>Subregion</th>
+          <th>Population</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const xml = new XMLHttpRequest();
+      xml.open('GET', 'https://restcountries.com/v2/all', true);
+      xml.onreadystatechange = function() {
+        if (xml.readyState === 4 && xml.status === 200) {
+          const data = JSON.parse(xml.responseText);
+          const asianCountries = data.filter(country => country.region === "Asia");
+          const tableBody = document.querySelector('#countries-table tbody');
+          asianCountries.forEach(function(country) {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            nameCell.textContent = country.name;
+            row.appendChild(nameCell);
+            const regionCell = document.createElement('td');
+            regionCell.textContent = country.region;
+            row.appendChild(regionCell);
+            const subregionCell = document.createElement('td');
+            subregionCell.textContent = country.subregion;
+            row.appendChild(subregionCell);
+            const populationCell = document.createElement('td');
+            populationCell.textContent = country.population;
+            row.appendChild(populationCell);
+            tableBody.appendChild(row);
+          });
+        }
+      };
+      xml.send();
+    </script>
+  </body>
+</html>
+________________________________________________________________________________________________________________
+b.Get all the countries with a population of less than 2 lakhs using Filter function:
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rest Countries API Demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Rest Countries API Demo</h1>
+    <table id="countries-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Region</th>
+          <th>Subregion</th>
+          <th>Population</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const xml = new XMLHttpRequest();
+      xml.open('GET', 'https://restcountries.com/v2/all', true);
+      xml.onreadystatechange = function() {
+        if (xml.readyState === 4 && xml.status === 200) {
+          const data = JSON.parse(xml.responseText);
+          const countries = data.filter(country => country.population < 200000);
+          const tableBody = document.querySelector('#countries-table tbody');
+          countries.forEach(function(country) {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            nameCell.textContent = country.name;
+            row.appendChild(nameCell);
+            const regionCell = document.createElement('td');
+            regionCell.textContent = country.region;
+            row.appendChild(regionCell);
+            const subregionCell = document.createElement('td');
+            subregionCell.textContent = country.subregion;
+            row.appendChild(subregionCell);
+            const populationCell = document.createElement('td');
+            populationCell.textContent = country.population;
+            row.appendChild(populationCell);
+            tableBody.appendChild(row);
+          });
+        }
+      };
+      xml.send();
+    </script>
+  </body>
+</html>
+________________________________________________________________________________________________________________
+c.Print the following details name, capital, flag using forEach function:
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rest Countries API Demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Rest Countries API Demo</h1>
+    <table id="countries-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Capital</th>
+          <th>Flag</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const xml = new XMLHttpRequest();
+      xml.open('GET', 'https://restcountries.com/v2/all', true);
+      xml.onreadystatechange = function() {
+        if (xml.readyState === 4 && xml.status === 200) {
+          const data = JSON.parse(xml.responseText);
+          const filteredData = data.filter(country => country.population < 200000);
+          const tableBody = document.querySelector('#countries-table tbody');
+          filteredData.forEach(function(country) {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            nameCell.textContent = country.name;
+            row.appendChild(nameCell);
+            const capitalCell = document.createElement('td');
+            capitalCell.textContent = country.capital;
+            row.appendChild(capitalCell);
+            const flagCell = document.createElement('td');
+            const flagImage = document.createElement('img');
+            flagImage.src = country.flag;
+            flagImage.alt = `${country.name} flag`;
+            flagImage.width = 50;
+            flagCell.appendChild(flagImage);
+            row.appendChild(flagCell);
+            tableBody.appendChild(row);
+          });
+        }
+      };
+      xml.send();
+    </script>
+  </body>
+</html>
+
+________________________________________________________________________________________________________________
+d.Print the total population of countries using reduce function:
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rest Countries API Demo</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Rest Countries API Demo</h1>
+    <table id="countries-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Capital</th>
+          <th>Flag</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+     const xml = new XMLHttpRequest();
+     xml.open('GET', 'https://restcountries.com/v2/all', true);
+     xml.onreadystatechange = function() {
+      if (xml.readyState === 4 && xml.status === 200) {
+    const data = JSON.parse(xml.responseText);
+    const asianCountries = data.filter(country => country.region === "Asia");
+    const tableBody = document.querySelector('#countries-table tbody');
+    asianCountries.forEach(function(country) {
+      const row = document.createElement('tr');
+      const nameCell = document.createElement('td');
+      nameCell.textContent = country.name;
+      row.appendChild(nameCell);
+      const regionCell = document.createElement('td');
+      regionCell.textContent = country.region;
+      row.appendChild(regionCell);
+      const subregionCell = document.createElement('td');
+      subregionCell.textContent = country.subregion;
+      row.appendChild(subregionCell);
+      const populationCell = document.createElement('td');
+      populationCell.textContent = country.population;
+      row.appendChild(populationCell);
+      tableBody.appendChild(row);
+    });
+    
+    const totalPopulation = asianCountries.reduce(function(acc, country) {
+      return acc + country.population;
+    }, 0);
+    console.log("Total population of Asian countries:", totalPopulation);
+  }
+};
+xml.send();
+
+    </script>
+  </body>
+</html>
+
+________________________________________________________________________________________________________________
+e.Print the country which uses US Dollars as currency.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
